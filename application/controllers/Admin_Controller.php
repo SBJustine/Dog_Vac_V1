@@ -12,6 +12,7 @@ class Admin_Controller extends CI_Controller {
 		$this->load->library('session');
 		$this->load->library('form_validation');
 
+		$this->load->library('textbee');
 	}
 
 	public function index()
@@ -63,54 +64,6 @@ class Admin_Controller extends CI_Controller {
 		$this->session->unset_userdata('data');
 		redirect('admin');
 	}
-
-	// public function approve_appointment() {
-	// 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	// 		if (!isset($_POST['appointmentId'])) {
-	// 			echo json_encode(['error' => 'Appointment ID is not provided']);
-	// 			return;
-	// 		}
-			
-	// 		$appointmentId = $_POST['appointmentId'];
-	
-	// 		// Update the appointment status
-	// 		$update_result = $this->Users_model->approve_appointment($appointmentId);
-	
-	// 		if ($update_result) {
-	// 			echo json_encode(['success' => true]);
-	// 		} else {
-	// 			echo json_encode(['error' => 'Failed to approve appointment']);
-	// 		}
-	// 	} else {
-	// 		echo json_encode(['error' => 'Invalid request method']);
-	// 	}
-	// }
-	
-	// public function reschedule_appointment() {
-	// 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-	// 		if (!isset($_POST['appointmentId'])) {
-	// 			echo json_encode(['error' => 'Appointment ID is not provided']);
-	// 			return;
-	// 		}
-			
-	// 		$appointmentId = $_POST['appointmentId'];
-	
-	// 		// Update the appointment status
-	// 		$update_result = $this->Users_model->reschedule_appointment($appointmentId);
-	
-	// 		if ($update_result) {
-	// 			echo json_encode(['success' => true]);
-	// 		} else {
-	// 			echo json_encode(['error' => 'Failed to reschedule appointment']);
-	// 		}
-	// 	} else {
-	// 		echo json_encode(['error' => 'Invalid request method']);
-	// 	}
-	// }
-	
-	
-
-	
 
 	
 	public function view_admin() {
@@ -536,14 +489,54 @@ public function appointment_list()
 
 
 
+// public function approveAppointments($id){
+
+// 	if($result = $this->Users_model->approveAppointment($id)){
+// 		$this->session->set_flashdata('success', 'This appointments is marked Approved!');
+// 	}else{
+// 		$this->session->set_flashdata('error', 'Failed!');
+// 	}
+// 	redirect('appointment_list');
+// }
+
 public function approveAppointments($id){
 
-	if($result = $this->Users_model->approveAppointment($id)){
-		$this->session->set_flashdata('success', 'This appointments is marked Approved!');
-	}else{
+	$result = $this->Users_model->approveAppointment($id);
+
+	if(!$result){
 		$this->session->set_flashdata('error', 'Failed!');
 	}
-	redirect('appointment_list');
+
+	$appointmentData = $this->Users_model->getAppointmentDataById($id);
+
+	if(!$appointmentData){
+		$this->session->set_flashdata('error', 'Failed!');
+	}
+
+	$client_id = $appointmentData->appointmentId;
+	$appointmentDate = $appointmentData->appointmentDate;
+
+	$clientData = $this->Users_model->getClientById($client_id);
+
+	if ($clientData && isset($clientData['client_fullname'])) {
+	
+		$messy = "Good day! Mr./Mrs. " . $clientData['client_fullname'] . ", This is from mama akay ug iro clinic. Your appointment has been approved on ". $appointmentDate .",  If you have any questions or concerns, feel free to contact us. Thank you.";
+	
+		$send_message_result = $this->textbee->sendMessage([$clientData['phone_number']], $messy);
+	
+		$message_status = json_decode($send_message_result, TRUE);
+		if ($message_status["data"]["successCount"] == 1) {
+			//success
+			$this->session->set_flashdata('success', 'This appointments is marked Approved! (message sent)');
+			redirect('appointment_list');
+		}
+	} else {
+		$this->session->set_flashdata('error', 'Error retrieving user information.');
+		redirect('appointment_list');
+	}
+
+	// // $this->session->set_flashdata('success', 'This appointments is marked Approved!');
+	// redirect('appointment_list');
 }
 
 
@@ -728,7 +721,7 @@ public function add_client() {
 			'client_fullname' => $this->input->post('client_fullname'),
 			'client_address' => $this->input->post('client_address'),
 			'sex' => $this->input->post('sex'),
-			'phone_number' => $this->input->post('phone_number'),
+			'phone_number' => '+63' . substr($this->input->post('phone_number'), 1),
 			'client_email' => $this->input->post('client_email'),
 			'password' => $this->input->post('password'),
 			'client_status' => $this->input->post('client_status'),

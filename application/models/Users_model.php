@@ -132,11 +132,24 @@ public function getAdminProfile($adminId) {
 			$query = $this->db->get('client_users');
 
 			if($query){
-				return $query->row();
+				return $query->row_array();
 			}else{
 				return false;
 			}
 		}
+
+
+		function getAppointmentDataById($id){
+			$this->db->where('appointmentId', $id);
+			$query = $this->db->get('appointments');
+
+			if($query){
+				return $query->row_array();
+			}else{
+				return false;
+			}
+		}
+
 
 		// In your model file (e.g., Users_model.php)
 

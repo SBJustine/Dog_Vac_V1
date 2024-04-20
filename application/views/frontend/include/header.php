@@ -109,10 +109,10 @@
                                     <nav> 
                                         <ul id="navigation">
                                             <li><a class="nav-link active" href="<?= base_url();?>index.php/home">Home</a></li>
-                                            <li><a  href="<?= base_url();?>index.php/services">Services</a></li>
-                                            <li><a href="<?= base_url();?>index.php/about">About</a></li>                                         
-                                            <li><a href="<?= base_url();?>index.php/contact">Contact</a></li>
-                                            <li><a href="<?= base_url();?>index.php/login_client" style="background-color: maroon; color: white; border-radius: 30px; padding: 20px 30px;">Login</a></li>
+                                            <li><a class="nav-link active" href="<?= base_url();?>index.php/services">Services</a></li>
+                                            <li><a class="nav-link active" href="<?= base_url();?>index.php/about">About</a></li>                                         
+                                            <li><a class="nav-link active" href="<?= base_url();?>index.php/contact">Contact</a></li>
+                                            <li><a class="nav-link active" href="<?= base_url();?>index.php/login_client" style="background-color: maroon; color: white; border-radius: 30px; padding: 20px 30px;">Login</a></li>
                                         </ul>
                                     </nav>
                                 </div>
