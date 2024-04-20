@@ -49,7 +49,7 @@
                 
                 <a href="<?= base_url();?>index.php/attendance" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Attendance/Salary</a> 
 
-                <!-- <a href="<?= base_url();?>index.php/product_table" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product/Purchase</a> -->
+                <a href="<?= base_url();?>index.php/product_table" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Product/Purchase</a>
 
                 <a href="<?= base_url();?>index.php/reports" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Reports</a>        
                 </div>

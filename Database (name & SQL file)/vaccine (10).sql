@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2024 at 03:33 PM
+-- Generation Time: Apr 20, 2024 at 04:31 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.1.17
 
@@ -72,10 +72,9 @@ CREATE TABLE `appointments` (
 --
 
 INSERT INTO `appointments` (`appointmentId`, `client_id`, `client_fullname`, `client_address`, `appointmentPetName`, `petBreed`, `service`, `appointmentDate`, `phone_number`, `appointmentTime`, `appointmentStatus`) VALUES
-(5, 12, 'Catherine Ramada', 'Loon, Bohol', 'Catherine Ramada', 'Bulldog', 'Vaccination', '2024-04-17', '09073775218', '9:00-10:00AM', 'Approved'),
-(15, 1, 'Jovelyn Geniston', 'Loon', 'Sogi', 'Belgian', 'Treatment', '2024-04-25', '09127903673', '10:00-11:00AM', 'Pending'),
+(15, 1, 'Jovelyn Geniston', 'Loon', 'Sogi', 'Belgian', 'Treatment', '2024-04-25', '09127903673', '10:00-11:00AM', 'Approved'),
 (16, 1, 'Jovelyn Geniston', 'Loon', 'Soka', 'Belgian', 'Treatment', '2024-04-18', '09127903673', '4:00-5:00PM', 'Approved'),
-(17, 12, 'Catherine Ramada', 'Loon, Bohol', 'Hero', 'Askal', 'Deworming', '2024-04-23', '09073775218', '1:00-2:00PM', 'Pending'),
+(17, 12, 'Catherine Ramada', 'Loon, Bohol', 'Hero', 'Askal', 'Deworming', '2024-04-23', '09073775218', '1:00-2:00PM', 'Approved'),
 (18, 12, 'Catherine Ramada', 'Loon, Bohol', 'Hero', 'Askal', 'Treatment', '2024-04-19', '09073775218', '5:00-6:00PM', 'Approved');
 
 -- --------------------------------------------------------
@@ -140,7 +139,8 @@ INSERT INTO `client_users` (`client_id`, `client_fullname`, `client_address`, `p
 (9, 'Jay Ar', 'Siquijor', '09127903673', 'jay@gmail.com', 'jay123', 'Male', 'Active', '2024-03-06 18:29:00'),
 (10, '121212', 'Tubigon', '09127903673', 'kim@gmail.com', 'admin', 'Male', 'Active', '2024-03-10 19:25:00'),
 (11, 'John Doe', 'USA', '09090909090', 'doe@gmail.com', 'doe123', 'Male', 'Active', '2024-04-09 09:33:00'),
-(12, 'Catherine Ramada', 'Loon, Bohol', '09073775218', 'cath@gmail.com', 'cath123', 'Female', 'Active', '2024-04-16 10:19:00');
+(12, 'Catherine Ramada', 'Loon, Bohol', '09073775218', 'cath@gmail.com', 'cath123', 'Female', 'Active', '2024-04-16 10:19:00'),
+(13, 'Troy Jayme', 'Loon, Bohol', '09925229844', 'troy@gmail.com', 'troy123', 'Male', 'Active', '2024-04-19 07:47:00');
 
 -- --------------------------------------------------------
 
@@ -258,7 +258,7 @@ INSERT INTO `product_table` (`productID`, `product_pic`, `productName`, `cost`, 
 (3, '', 'Pet Food', 150, 50, 'Cat', '2024-03-01 22:53:00'),
 (4, '3c272d77b38dd26f96619e52dd032b41.jpg', 'Dog Shampoo', 105, 2, 'Dog', '2024-04-14 07:49:00'),
 (5, '5512dca6a53f9d9f4d19d7e8a27dccaa.jpg', 'Pet Soap Bar', 150, 5, 'Dog', '2024-04-14 23:50:00'),
-(6, '0fec282d894f30e064e2bc62e6de2d1e.jpg', 'Pet Collar', 150, 55, 'Dog', '2024-04-14 23:55:00');
+(6, '0fec282d894f30e064e2bc62e6de2d1e.jpg', 'Pet Collar', 150, 54, 'Dog', '2024-04-19 15:41:06');
 
 -- --------------------------------------------------------
 
@@ -293,7 +293,10 @@ INSERT INTO `purchase_table` (`purchaseID`, `productID`, `client_id`, `date_purc
 (27, 6, 2, '2024-04-14 16:00:00', 2, 300),
 (28, 1, 9, '2024-04-15 16:00:00', 4, 880),
 (29, 1, 7, '2024-04-15 16:00:00', 2, 440),
-(30, 6, 12, '2024-04-17 16:00:00', 3, 450);
+(36, 6, 13, '2024-04-18 16:00:00', 1, 150),
+(37, 6, 13, '2024-04-18 16:00:00', 1, 150),
+(38, 6, 13, '2024-04-18 16:00:00', 2, 300),
+(39, 4, 12, '2024-04-18 16:00:00', 1, 105);
 
 -- --------------------------------------------------------
 
@@ -500,7 +503,7 @@ ALTER TABLE `admin_users`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointmentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `appointmentId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `attendance_table`
@@ -512,7 +515,7 @@ ALTER TABLE `attendance_table`
 -- AUTO_INCREMENT for table `client_users`
 --
 ALTER TABLE `client_users`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `employee_table`
@@ -542,7 +545,7 @@ ALTER TABLE `product_table`
 -- AUTO_INCREMENT for table `purchase_table`
 --
 ALTER TABLE `purchase_table`
-  MODIFY `purchaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `purchaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `reports`
