@@ -249,7 +249,6 @@ public function appointmentSchedule() {
 	$client_id = $this->session->userdata('client_id');
 	$appointmentId = $this->session->userdata('appointmentId');
 
-
 	$appointmentUsers = $this->Users_model->fetchAppointmentsById($client_id);
 	$nextData = $this->Users_model->getNextAppointment($appointmentId);
 
